@@ -560,7 +560,7 @@ impl super::Adapter {
         );
         private_caps.set(
             super::PrivateCapabilities::GET_BUFFER_SUB_DATA,
-            cfg!(target_arch = "wasm32") || full_ver.is_some(),
+            (cfg!(target_arch = "wasm32") && !cfg!(target_os = "emscripten")) || full_ver.is_some(),
         );
         let color_buffer_float = extensions.contains("GL_EXT_color_buffer_float")
             || extensions.contains("GL_ARB_color_buffer_float")
