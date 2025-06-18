@@ -1,4 +1,4 @@
-use std::sync::LazyLock;
+use once_cell::sync::Lazy;
 
 use hashbrown::HashSet;
 
@@ -499,7 +499,7 @@ pub const RESERVED_KEYWORDS: &[&str] = &[
 /// significant time during [`Namer::reset`](crate::proc::Namer::reset).
 ///
 /// See <https://github.com/gfx-rs/wgpu/pull/7338> for benchmarks.
-pub static RESERVED_KEYWORD_SET: LazyLock<HashSet<&'static str>> = LazyLock::new(|| {
+pub static RESERVED_KEYWORD_SET: Lazy<HashSet<&'static str>> = Lazy::new(|| {
     let mut set = HashSet::default();
     set.reserve(RESERVED_KEYWORDS.len());
     for &word in RESERVED_KEYWORDS {
